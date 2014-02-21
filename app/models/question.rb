@@ -3,11 +3,11 @@ class Question < ActiveRecord::Base
   has_many :tags, foreign_key: :id_question
 
   def self.find_all(params = Hash.new())
-    questions = Array.new
+    questions, conditions = Array.new, Array.new
     offset = params[:offset] || 0
     limit = params[:limit] || 25
     search = ["reference_law LIKE ? or excerpt_law LIKE ?", "%#{params[:law]}%", "%#{params[:law]}%"]
-    conditions = ["tags.tag = ?", "#{params[:tags]}"] if !params[:tags].blank?
+    conditions = ((params[:tags].include?(',')) ? ["tags.tag in (?)", params[:tags].split(',')] : ["tags.tag = ?", "#{params[:tags]}"]) if !params[:tags].blank?
     Question.includes(:tags).where(conditions).where(search).limit(limit).offset(offset).each do |field|
       questions << field.details
     end

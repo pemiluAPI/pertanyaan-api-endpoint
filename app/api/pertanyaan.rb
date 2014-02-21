@@ -3,34 +3,51 @@ module Pertanyaan
     prefix 'api'
     format :json
 
-    resource :pertanyaan do
+    resource :questions do
       desc "Return all data question."
       get do
+        questions = Question.find_all(params)
         {
           results: {
             count: Question.count,
-            total: Question.count,
-            data: Question.all
+            total: questions.count,
+            questions: questions
           }
         }
       end
 
-      desc "Return a question."
+      desc "Return a question"
       params do
-        requires :id, type: Integer, desc: "Question ID."
+        requires :id, type: String, desc: "Question ID."
       end
       route_param :id do
         get do
           question = Question.find_by(id: params[:id])
+          question_detail = question.details rescue nil
           {
             results: {
-              count: (question) ? 1 : 0,
-              total: (question) ? 1 : 0,
-              data: question
+              count: (question_detail) ? 1 : 0,
+              total: (question_detail) ? 1 : 0,
+              questions: question_detail
             }
           }
         end
       end
     end
+
+    resource :tags do
+      desc "Return all tags."
+      get do
+        tags = Tag.find_all
+        {
+          results: {
+            count: tags.count,
+            tags: tags
+          }
+        }
+      end
+    end
+
+    
   end
 end

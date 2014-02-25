@@ -39,7 +39,11 @@ group :test, :development do
   gem "rspec-rails", "~> 2.4"
   gem 'factory_girl_rails', "~> 4.2.1"
   gem 'simplecov', :require => false
-  gem "database_cleaner"
+  gem 'database_cleaner', git: 'git@github.com:bmabey/database_cleaner.git'
+  gem 'capistrano', "~> 3.1.0"
+  gem 'capistrano-bundler'
+  gem 'capistrano-rails'
+  gem 'capistrano-rbenv', github: "capistrano/rbenv"
 end
 
 # Use ActiveModel has_secure_password

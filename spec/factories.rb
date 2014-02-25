@@ -8,7 +8,7 @@ FactoryGirl.define do
   end
 
   factory :tag do
-    id_question 
+    id_question '001'
     tag 'indonesia'
   end
 

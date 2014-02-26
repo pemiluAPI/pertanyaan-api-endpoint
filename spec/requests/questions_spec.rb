@@ -34,7 +34,7 @@ describe Pertanyaan::API do
     end
 
     it "offset questions should works" do
-      get "/api/questions?offset=1"
+      get "/api/questions?limit=10&offset=1"
       ress = JSON.parse(response.body)
       response.status.should == 200
       ress["results"]["count"].should == 2
@@ -59,7 +59,7 @@ describe Pertanyaan::API do
     end
 
     it "seacrh by law questions should works" do
-      get "/api/questions?law=UUD%201945"
+      get "/api/questions?law=UUD_1945"
       ress = JSON.parse(response.body)
       response.status.should == 200
       ress["results"]["count"].should == 2

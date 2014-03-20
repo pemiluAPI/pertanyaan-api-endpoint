@@ -29,16 +29,16 @@ describe Pertanyaan::API do
       get "/api/questions?limit=1"
       ress = JSON.parse(response.body)
       response.status.should == 200
-      ress["results"]["count"].should == 2
-      ress["results"]["total"].should == 1
+      ress["results"]["count"].should == 1
+      ress["results"]["total"].should == 2
     end
 
     it "offset questions should works" do
       get "/api/questions?limit=10&offset=1"
       ress = JSON.parse(response.body)
       response.status.should == 200
-      ress["results"]["count"].should == 2
-      ress["results"]["total"].should == 1
+      ress["results"]["count"].should == 1
+      ress["results"]["total"].should == 2
       ress["results"]["questions"][0]['id'].should == "002"
     end
 
@@ -46,7 +46,7 @@ describe Pertanyaan::API do
       get "/api/questions?tags=indonesia"
       ress = JSON.parse(response.body)
       response.status.should == 200
-      ress["results"]["count"].should == 2
+      ress["results"]["count"].should == 1
       ress["results"]["total"].should == 1
     end
 
@@ -54,7 +54,7 @@ describe Pertanyaan::API do
       get "/api/questions?tags=whatever"
       ress = JSON.parse(response.body)
       response.status.should == 200
-      ress["results"]["count"].should == 2
+      ress["results"]["count"].should == 0
       ress["results"]["total"].should == 0
     end
 
@@ -62,7 +62,7 @@ describe Pertanyaan::API do
       get "/api/questions?law=UUD_1945"
       ress = JSON.parse(response.body)
       response.status.should == 200
-      ress["results"]["count"].should == 2
+      ress["results"]["count"].should == 1
       ress["results"]["total"].should == 1
     end
   end
@@ -75,13 +75,13 @@ describe Pertanyaan::API do
         results: {
           count: 1,
           total: 1,
-          questions: {:id=>'001',
+          questions: [{:id=>'001',
             :question => 'Apakah perempuan bisa mencalonkan diri dalam pemilu?',
             :answer => 'Ya',
             :reference_law => 'UUD 1945 Pasal 27 Ayat (1)',
             :excerpt_law => 'Pasal 27: (1) Yang menjadi warga negara ialah orang orang bangsa Indonesia asli dan orang orang bangsa lain yang disahkan dengan undangundang sebagai warga negara.',
             :tags => ["indonesia"]
-          }
+          }]
         }
       }.to_json
     end

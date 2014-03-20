@@ -1,28 +1,12 @@
-== README
+FORMAT: 1A
+HOST: http://api.pemiluapi.org/pertanyaan/api/
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# Peraturan API
+The Peraturan API is a service that provides answers to questions about rules and regulations affecting the 2014 Indonesian elections.  It's part of [API Pemilu](http://developer.pemiluapi.org/)
 
-Things you may want to cover:
+## How to setup
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+1. `$ bundle install`
+2. Configure your database credentials in database.yml
+2. `$ bundle exec rake db:setup`
+3. `$ bundle exec rails server`

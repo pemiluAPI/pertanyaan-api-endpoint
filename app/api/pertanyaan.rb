@@ -23,12 +23,12 @@ module Pertanyaan
       route_param :id do
         get do
           question = Question.find_by(id: params[:id])
-          question_detail = question.details rescue nil
+          question_detail = [question.details] rescue nil
           {
             results: {
               count: (question_detail) ? 1 : 0,
               total: (question_detail) ? 1 : 0,
-              questions: [question_detail]
+              questions: question_detail
             }
           }
         end

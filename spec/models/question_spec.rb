@@ -15,6 +15,14 @@ describe Question do
     @question.details.should == question_details
   end
 
+  it "should return array" do
+     Question.find_all.class.should == Array
+  end
+
+  it "should return interger for total" do
+     Question.get_total.class.should == Fixnum
+  end
+
   it "should return questions" do
      create(:question, id: "002")
      Question.find_all.count == 2
